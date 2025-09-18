@@ -3,173 +3,172 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ghost Print</title>
+  <title>Ghostprint Demo</title>
   <style>
+    /* General Styles */
     body {
       margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      color: #e0e0e0;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
-      min-height: 100vh;
-    }
-
-    /* Floating notification */
-    #note {
-      position: fixed;
-      top: 20px;
-      background: rgba(25, 25, 25, 0.95);
-      color: #00ff3c;
-      padding: 12px 20px;
-      border: 1px solid #15ff00;
-      border-radius: 8px;
-      font-size: 15px;
-      z-index: 999;
-      animation: fadeOut 6s forwards;
-      box-shadow: 0 0 12px rgba(0, 255, 30, 0.4);
-    }
-
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      70% { opacity: 1; }
-      100% { opacity: 0; display: none; }
     }
 
     h1 {
-      margin-top: 70px;
-      font-size: 32px;
-      font-weight: 600;
-      color: #00ff15;
-      font-family: Georgia, 'Times New Roman', Times, serif;
-      letter-spacing: 1px;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #fff;
       text-align: center;
     }
 
-    .description {
+    p.description {
       max-width: 800px;
-      margin: 20px auto;
-      font-size: 16px;
-      line-height: 1.7;
       text-align: center;
-      color: #00ff15;
+      margin-bottom: 15px;
+      line-height: 1.4;
+      color: #ccc;
     }
 
-    /* Text input */
+    #contact {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+      text-align: center;
+    }
+
     #textbox {
-      margin: 25px 0;
-      padding: 12px 15px;
       width: 60%;
-      border: 1px solid #333;
-      border-radius: 8px;
-      background: #111;
-      color: #0dff00;
+      max-width: 400px;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 6px;
+      border: 1px solid #555;
+      background: #222;
+      color: #eee;
       outline: none;
-      transition: all 0.3s ease;
     }
 
     #textbox:focus {
-      border-color: #00ff04;
-      box-shadow: 0 0 12px rgba(0, 255, 13, 0.6);
+      border-color: #7d5fff;
+      box-shadow: 0 0 5px rgba(125, 95, 255, 0.6);
     }
 
-    /* Log box */
     #log {
-      margin-top: 20px;
-      max-height: 320px;
-      width: 80%;
+      width: 90%;
+      max-width: 800px;
+      max-height: 300px;
       overflow-y: auto;
-      background: #111;
-      border: 1px solid #333;
-      border-radius: 8px;
-      padding: 15px;
-      font-family: monospace;
-      font-size: 14px;
-      line-height: 1.5;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
-      transition: border 0.3s;
-    }
-
-    #log:hover {
-      border-color: #00ff2f;
+      background: #222;
+      border-radius: 6px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #eee;
     }
 
     .log-entry {
-      margin: 4px 0;
-      color: #00ff22;
+      margin-bottom: 5px;
+      padding: 5px 10px;
+      background: #333;
+      border-radius: 4px;
+      word-break: break-word;
+      transition: background 0.2s;
     }
 
-    footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #aaa;
-      text-align: center;
-      padding: 20px 0;
-      border-top: 1px solid #222;
-      width: 100%;
+    .log-entry:hover {
+      background: #444;
     }
 
-    footer span {
-      color: #00ff2f;
-      font-weight: 500;
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      #textbox {
+        width: 90%;
+      }
+      #log {
+        max-height: 200px;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      p.description {
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div id="note">Note: This page tracks your interactions in real-time.</div>
-  
-  <h1>GHOST PRINT</h1>
 
-  <div class="description">
-    This demo captures and displays behavioral patterns such as mouse movement, 
-    clicks, scrolling, keystrokes, and text input.  
-    The goal is to illustrate how subtle user interactions can create a unique **digital fingerprint**.  
-    <br><br>
-    Type in the box, move around, and interact naturally.  
-    All your actions will be logged in real-time below for analysis.  
-  </div>
+  <h1>Ghostprint Demo</h1>
 
-  <input id="textbox" type="text" placeholder="Type something..." />
+  <p class="description">
+    Ghostprint is a behavioral fingerprint demo that tracks mouse movements, clicks, scrolls, and keystrokes. 
+    It demonstrates how user behavior can be analyzed for patterns and insights. All logs appear below.
+  </p>
+
+  <input type="text" id="textbox" placeholder="Type something here..." />
 
   <div id="log"></div>
 
-  <footer>
-    Contact: <span>s6ulm9d</span> &nbsp; | &nbsp; Gmail: <span>srybroiambusy@gmail.com</span>
-  </footer>
+  <div id="contact">
+    Contact: s6ulm9d &nbsp;|&nbsp; Email: srybroiambusy@gmail.com
+  </div>
 
   <script>
     const logBox = document.getElementById("log");
 
-    function logEvent(event) {
-      const msg = `[${new Date().toLocaleTimeString()}] ${event}`;
+    function logEvent(msg) {
+      const timestamp = new Date().toLocaleTimeString();
       const entry = document.createElement("div");
       entry.className = "log-entry";
-      entry.textContent = msg;
+      entry.textContent = `[${timestamp}] ${msg}`;
       logBox.appendChild(entry);
 
-      // Auto-scroll to latest log
+      // Auto-scroll to latest
       logBox.scrollTop = logBox.scrollHeight;
+
+      // Optional: send to server (disabled if no backend)
+      // fetch("/log", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({event: msg}) });
     }
 
-    // Example: track mouse, clicks, keys, text
-    document.addEventListener("mousemove", e => {
+    // Mouse movement
+    document.addEventListener("mousemove", (e) => {
       logEvent(`Mouse moved to (${e.clientX}, ${e.clientY})`);
     });
 
-    document.addEventListener("click", e => {
-      logEvent(`Mouse clicked at (${e.clientX}, ${e.clientY})`);
+    // Clicks
+    document.addEventListener("click", (e) => {
+      logEvent(`Click at (${e.clientX}, ${e.clientY})`);
     });
 
-    document.addEventListener("keydown", e => {
+    // Page scroll (desktop & mobile)
+    window.addEventListener("scroll", () => {
+      logEvent(`Page scroll position: ${window.scrollY}`);
+    });
+
+    // Scroll inside log box
+    logBox.addEventListener("scroll", () => {
+      logEvent(`Log box scroll position: ${logBox.scrollTop}`);
+    });
+
+    // Keyboard input
+    document.addEventListener("keydown", (e) => {
       logEvent(`Key pressed: ${e.key}`);
     });
 
-    document.getElementById("textbox").addEventListener("input", e => {
-      logEvent(`Text input: ${e.target.value}`);
+    // Textbox typing
+    const textbox = document.getElementById("textbox");
+    textbox.addEventListener("input", (e) => {
+      logEvent(`Text typed: ${e.target.value}`);
+    });
+
+    // Mobile touch scroll tracking (optional enhancement)
+    document.addEventListener("touchmove", (e) => {
+      logEvent(`Touch move detected`);
     });
   </script>
+
 </body>
 </html>
