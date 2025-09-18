@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghost Print</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    /* Floating notification */
+    #note {
+      position: fixed;
+      top: 20px;
+      background: rgba(25, 25, 25, 0.95);
+      color: #00ff3c;
+      padding: 12px 20px;
+      border: 1px solid #15ff00;
+      border-radius: 8px;
+      font-size: 15px;
+      z-index: 999;
+      animation: fadeOut 6s forwards;
+      box-shadow: 0 0 12px rgba(0, 255, 30, 0.4);
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      70% { opacity: 1; }
+      100% { opacity: 0; display: none; }
+    }
+
+    h1 {
+      margin-top: 70px;
+      font-size: 32px;
+      font-weight: 600;
+      color: #00ff15;
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .description {
+      max-width: 800px;
+      margin: 20px auto;
+      font-size: 16px;
+      line-height: 1.7;
+      text-align: center;
+      color: #00ff15;
+    }
+
+    /* Text input */
+    #textbox {
+      margin: 25px 0;
+      padding: 12px 15px;
+      width: 60%;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #111;
+      color: #0dff00;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    #textbox:focus {
+      border-color: #00ff04;
+      box-shadow: 0 0 12px rgba(0, 255, 13, 0.6);
+    }
+
+    /* Log box */
+    #log {
+      margin-top: 20px;
+      max-height: 320px;
+      width: 80%;
+      overflow-y: auto;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 15px;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+      transition: border 0.3s;
+    }
+
+    #log:hover {
+      border-color: #00ff2f;
+    }
+
+    .log-entry {
+      margin: 4px 0;
+      color: #00ff22;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #aaa;
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid #222;
+      width: 100%;
+    }
+
+    footer span {
+      color: #00ff2f;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div id="note">Note: This page tracks your interactions in real-time.</div>
+  
+  <h1>GHOST PRINT</h1>
+
+  <div class="description">
+    This demo captures and displays behavioral patterns such as mouse movement, 
+    clicks, scrolling, keystrokes, and text input.  
+    The goal is to illustrate how subtle user interactions can create a unique **digital fingerprint**.  
+    <br><br>
+    Type in the box, move around, and interact naturally.  
+    All your actions will be logged in real-time below for analysis.  
+  </div>
+
+  <input id="textbox" type="text" placeholder="Type something..." />
+
+  <div id="log"></div>
+
+  <footer>
+    Contact: <span>s6ulm9d</span> &nbsp; | &nbsp; Gmail: <span>srybroiambusy@gmail.com</span>
+  </footer>
+
+  <script>
+    const logBox = document.getElementById("log");
+
+    function logEvent(event) {
+      const msg = `[${new Date().toLocaleTimeString()}] ${event}`;
+      const entry = document.createElement("div");
+      entry.className = "log-entry";
+      entry.textContent = msg;
+      logBox.appendChild(entry);
+
+      // Auto-scroll to latest log
+      logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    // Example: track mouse, clicks, keys, text
+    document.addEventListener("mousemove", e => {
+      logEvent(`Mouse moved to (${e.clientX}, ${e.clientY})`);
+    });
+
+    document.addEventListener("click", e => {
+      logEvent(`Mouse clicked at (${e.clientX}, ${e.clientY})`);
+    });
+
+    document.addEventListener("keydown", e => {
+      logEvent(`Key pressed: ${e.key}`);
+    });
+
+    document.getElementById("textbox").addEventListener("input", e => {
+      logEvent(`Text input: ${e.target.value}`);
+    });
+  </script>
+</body>
+</html>
