@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ghostprint Demo</title>
   <style>
-    /* General Styles */
     body {
       margin: 0;
       padding: 10px;
@@ -82,7 +81,6 @@
       background: #444;
     }
 
-    /* Mobile adjustments */
     @media (max-width: 600px) {
       #textbox {
         width: 90%;
@@ -125,12 +123,7 @@
       entry.className = "log-entry";
       entry.textContent = `[${timestamp}] ${msg}`;
       logBox.appendChild(entry);
-
-      // Auto-scroll to latest
       logBox.scrollTop = logBox.scrollHeight;
-
-      // Optional: send to server (disabled if no backend)
-      // fetch("/log", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({event: msg}) });
     }
 
     // Mouse movement
@@ -141,16 +134,6 @@
     // Clicks
     document.addEventListener("click", (e) => {
       logEvent(`Click at (${e.clientX}, ${e.clientY})`);
-    });
-
-    // Page scroll (desktop & mobile)
-    window.addEventListener("scroll", () => {
-      logEvent(`Page scroll position: ${window.scrollY}`);
-    });
-
-    // Scroll inside log box
-    logBox.addEventListener("scroll", () => {
-      logEvent(`Log box scroll position: ${logBox.scrollTop}`);
     });
 
     // Keyboard input
@@ -164,9 +147,41 @@
       logEvent(`Text typed: ${e.target.value}`);
     });
 
-    // Mobile touch scroll tracking (optional enhancement)
+    // Scroll tracking with throttling
+    let lastScrollY = window.scrollY;
+    let scrollTimeout;
+
+    function handleScroll() {
+      const currentY = window.scrollY;
+      if (currentY !== lastScrollY) {
+        logEvent(`Page scroll position: ${currentY}`);
+        lastScrollY = currentY;
+      }
+    }
+
+    window.addEventListener("scroll", () => {
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(handleScroll, 50); // 50ms throttle
+    });
+
+    // Log box scroll tracking
+    let lastLogScroll = logBox.scrollTop;
+    logBox.addEventListener("scroll", () => {
+      const currentLogScroll = logBox.scrollTop;
+      if (currentLogScroll !== lastLogScroll) {
+        logEvent(`Log box scroll position: ${currentLogScroll}`);
+        lastLogScroll = currentLogScroll;
+      }
+    });
+
+    // Optional: mobile touch scrolling
+    let lastTouchY = 0;
     document.addEventListener("touchmove", (e) => {
-      logEvent(`Touch move detected`);
+      const touch = e.touches[0];
+      if (touch.clientY !== lastTouchY) {
+        logEvent(`Touch move detected at Y: ${touch.clientY}`);
+        lastTouchY = touch.clientY;
+      }
     });
   </script>
 
